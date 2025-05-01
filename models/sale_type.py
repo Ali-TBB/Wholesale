@@ -36,23 +36,23 @@ class SaleType(models.Model):
             result.append((record.id, name))
         return result
 
+from odoo import models, fields
 
 class SaleTypeWizard(models.TransientModel):
     _name = 'sale.type.wizard'
-    _description = 'Change Sale Type Wizard'
-    
-    sale_type = fields.Selection(
-        [('retail', 'Retail'), ('wholesale', 'Wholesale')],
-        string="Sale Type",
-        required=True
-    )
-    product_ids = fields.Many2many(
-        'product.template',
-        string="Products"
-    )
-    
-    def action_change_sale_type(self):
-        self.ensure_one()
-        if self.product_ids:
-            self.product_ids.write({'sale_type': self.sale_type})
-        return {'type': 'ir.actions.act_window_close'}
+    _description = 'Wizard to Change Sale Type for Products'
+
+    product_ids = fields.Many2many('product.template', string="Products")
+    sale_type_id = fields.Many2one('sale.type', string="Sale Type", required=True)
+
+    def apply_sale_type(self):
+        for product in self.product_ids:
+            product.sale_type_id = self.sale_type_id.id
+
+    @api.model
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        active_ids = self.env.context.get('active_ids')
+        if active_ids:
+            res['product_ids'] = [(6, 0, active_ids)]
+        return res

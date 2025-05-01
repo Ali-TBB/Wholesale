@@ -49,7 +49,7 @@
             </xpath>
             </field>
         </record>
-        
+
         <record id="action_sale_type_wizard" model="ir.actions.act_window">
             <field name="name">Change Sale Type</field>
             <field name="res_model">sale.type.wizard</field>
@@ -64,7 +64,13 @@
             <field name="binding_type">action</field>
             <field name="state">code</field>
             <field name="code">
-                action = env.ref('Wholesale.action_sale_type_wizard').with_context(active_ids=records.ids).read()[0]
+                        action = {
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.type.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_ids': records.ids},
+        }
             </field>
         </record>
 </odoo>
