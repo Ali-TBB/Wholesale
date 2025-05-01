@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="default_sale_type_unit" model="sale.type">
+        <field name="name">Unit</field>
+        <field name="quantity">1</field>
+        <field name="is_default">True</field>
+        <field name="is_protected">True</field>
+        <field name="description">Single unit of the product</field>
+    </record>
+
+    <record id="default_sale_type_box" model="sale.type">
+        <field name="name">Box</field>
+        <field name="quantity">12</field>
+        <field name="description">Standard product box</field>
+    </record>
+
+    <record id="default_sale_type_pack" model="sale.type">
+        <field name="name">Pack</field>
+        <field name="quantity">24</field>
+        <field name="description">Product pack</field>
+    </record>
+</odoo>

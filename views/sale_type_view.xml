@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale Type Tree View -->
+    <record id="sale_type_tree" model="ir.ui.view">
+        <field name="name">sale.type.tree</field>
+        <field name="model">sale.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="quantity"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Sale Type Form View -->
+    <record id="sale_type_form" model="ir.ui.view">
+        <field name="name">sale.type.form</field>
+        <field name="model">sale.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="quantity"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sale Type Action -->
+    <record id="sale_type_action" model="ir.actions.act_window">
+        <field name="name">Sale Types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Sale Type to define different selling methods (Unit/Box)
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Structure -->
+    <menuitem id="wholesale_root" name="Wholesale" sequence="10" groups="base.group_user"/>
+
+    <menuitem id="wholesale_sale_root"
+              name="Sale"
+              parent="wholesale_root"
+              sequence="10"
+              groups="base.group_user"/>
+
+    <menuitem id="sale_type_root"
+              name="Sale Types"
+              parent="wholesale_sale_root"
+              action="sale_type_action"
+              sequence="10"
+              groups="base.group_user"/>
+</odoo>
