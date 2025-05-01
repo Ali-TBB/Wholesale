@@ -13,6 +13,7 @@
         'security/ir.model.access.csv',
         'views/product.xml',
         'views/sale_type_view.xml',
+        'views/sale_type_wizard_views.xml',
         'data/default_sale_types.xml'
     ],
     'demo': [],

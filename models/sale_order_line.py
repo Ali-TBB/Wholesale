@@ -21,7 +21,12 @@ class SaleOrderLine(models.Model):
     def _compute_sale_type_id(self):
         for line in self:
             if line.product_id:
-                line.sale_type_id = line.product_id.product_tmpl_id.sale_type_id
+                if line.product_id.product_tmpl_id.sale_type_id:
+                    line.sale_type_id = line.product_id.product_tmpl_id.sale_type_id
+                else:
+                    # Default to the first sale type if none is set
+                    default_sale_type = self.env['sale.type'].search([], limit=1)
+                    line.sale_type_id = default_sale_type.id if default_sale_type else False
             else:
                 line.sale_type_id = False
             self._trigger_price_recalculation()

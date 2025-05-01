@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- views/sale_type_wizard_views.xml -->
+    <record id="view_sale_type_wizard_form" model="ir.ui.view">
+        <field name="name">sale.type.wizard.form</field>
+        <field name="model">sale.type.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Sale Type">
+                <group>
+                    <field name="sale_type_id"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="apply_sale_type" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
