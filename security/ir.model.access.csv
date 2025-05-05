@@ -1,5 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
 access_wholesale_sale_type,sale.type.access,model_sale_type,base.group_user,1,1,1,1
 access_wholesale_sale_type_wizard,sale.type.wizard.access,model_sale_type_wizard,base.group_user,1,1,1,1
+
+access_wholesale_pack_product,pack.product.access,model_pack_product,base.group_user,1,1,1,1
+access_wholesale_pack_product_line,pack.product.line.access,model_pack_product_line,base.group_user,1,1,1,1
+access_wholesale_pack_product_wizard,pack.product.wizard.access,model_pack_product_wizard,base.group_user,1,1,1,1
 
 access_wholesale_sale_order_line,sale.order.line.access,model_sale_order_line,base.group_user,1,1,1,1

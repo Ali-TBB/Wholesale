@@ -11,10 +11,11 @@
     'data': [
         # 'security/hospital_security.xml',
         'security/ir.model.access.csv',
-        'views/product.xml',
         'views/sale_type_view.xml',
         'views/sale_type_wizard_views.xml',
-        'data/default_sale_types.xml'
+        'views/sale_type_action.xml',
+        'views/pack_product_view.xml',
+        'views/pack_product_wizard.xml'
     ],
     'demo': [],
     'qweb': [],

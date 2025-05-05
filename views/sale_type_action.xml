@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale Type Action -->
+        <record id="action_sale_type_wizard" model="ir.actions.act_window">
+            <field name="name">Change Sale Type</field>
+            <field name="res_model">sale.type.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="product_template_action_change_sale_type" model="ir.actions.server">
+            <field name="name">Change Sale Type</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">
+                        action = {
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.type.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_ids': records.ids},
+        }
+            </field>
+        </record>
+</odoo>

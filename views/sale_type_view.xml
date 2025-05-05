@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+        <!-- Sale Type Action -->
+        <record id="sale_type_action" model="ir.actions.act_window">
+            <field name="name">Sale Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Sale Type to define different selling methods (Unit/Box)
+                </p>
+            </field>
+        </record>
+    
+    <!-- Menu Structure -->
+    <menuitem id="wholesale_root" name="Wholesale" sequence="10" groups="base.group_user"/>
+
+    <menuitem id="wholesale_sale_root"
+              name="Sale"
+              parent="wholesale_root"
+              sequence="10"
+              groups="base.group_user"/>
+
+    <menuitem id="sale_type_root"
+              name="Sale Types"
+              parent="wholesale_sale_root"
+              action="sale_type_action"
+              sequence="10"
+              groups="base.group_user"/>
+
     <!-- Sale Type Tree View -->
     <record id="sale_type_tree" model="ir.ui.view">
         <field name="name">sale.type.tree</field>
@@ -30,32 +59,42 @@
         </field>
     </record>
 
-    <!-- Sale Type Action -->
-    <record id="sale_type_action" model="ir.actions.act_window">
-        <field name="name">Sale Types</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">sale.type</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new Sale Type to define different selling methods (Unit/Box)
-            </p>
+
+
+    <!-- Add sale type to product tree view -->
+    <record id="view_product_template_tree" model="ir.ui.view">
+        <field name="name">product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="sale_type_id"/>
+            </xpath>
         </field>
     </record>
 
-    <!-- Menu Structure -->
-    <menuitem id="wholesale_root" name="Wholesale" sequence="10" groups="base.group_user"/>
+    <!-- Add sale type to product form view -->
+    <record id="view_product_template_form" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="sale_type_id" options="{'create': True}" required="1"/>
+            </xpath>
+        </field>
+    </record>
 
-    <menuitem id="wholesale_sale_root"
-              name="Sale"
-              parent="wholesale_root"
-              sequence="10"
-              groups="base.group_user"/>
-
-    <menuitem id="sale_type_root"
-              name="Sale Types"
-              parent="wholesale_sale_root"
-              action="sale_type_action"
-              sequence="10"
-              groups="base.group_user"/>
+    <!-- Add sale type to order form view -->
+    <record id="view_order_form_inherit_selling_type" model="ir.ui.view">
+        <field name="name">sale.order.line.inherit.selling.type</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+            <field name="quantity_of_type" />
+            <field name="sale_type_id" options="{'create': True}" required="1"/>
+        </xpath>
+        </field>
+    </record>
 </odoo>

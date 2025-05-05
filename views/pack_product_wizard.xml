@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_pack_wizard_form" model="ir.ui.view">
+        <field name="name">pack.product.wizard.form</field>
+        <field name="model">pack.product.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Choose the Pack">
+                <group>
+                    <field name="pack_product"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="add_product_to_order" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Add Pack Button to Sale Order -->
+    <record id="view_order_form_add_pack" model="ir.ui.view">
+        <field name="name">sale.order.form.add.pack</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']" position="before">
+                <button name="action_open_pack_wizard"
+                        string=" Add Pack"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-cubes"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

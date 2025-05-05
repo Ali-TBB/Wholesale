@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action for Pack Product -->
+    <record id="pack_action" model="ir.actions.act_window">
+        <field name="name">Pack</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pack.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Pack
+            </p>
+        </field>
+    </record>
+    <!-- Menu Structure -->
+    <menuitem id="wholesale_pack_root"
+        name="Pack"
+        parent="wholesale_root"
+        action="pack_action"
+        sequence="10"
+        groups="base.group_user" />
+
+    <!-- Form View for Pack Product -->
+    <record id="view_form_pack_product" model="ir.ui.view">
+        <field name="name">pack.product.form</field>
+        <field name="model">pack.product</field>
+        <field name="arch" type="xml">
+            <form string="Pack Product">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+
+                    <notebook>
+                        <page string="Pack Lines">
+                            <field name="line_ids" context="{'default_display_type': 'product'}"
+                                editable="bottom">
+                                <tree string="Pack Product Lines" editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="sale_type_id" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Pack Product (for list display) -->
+    <record id="view_tree_pack_product" model="ir.ui.view">
+        <field name="name">pack.product.tree</field>
+        <field name="model">pack.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

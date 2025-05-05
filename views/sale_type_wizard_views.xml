@@ -7,11 +7,11 @@
         <field name="arch" type="xml">
             <form string="Change Sale Type">
                 <group>
-                    <field name="sale_type_id"/>
+                    <field name="sale_type_id" />
                 </group>
                 <footer>
-                    <button string="Apply" type="object" name="apply_sale_type" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button string="Apply" type="object" name="apply_sale_type" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
         </field>
