@@ -60,19 +60,6 @@ class SaleOrderLine(models.Model):
 
             self._trigger_price_recalculation()
 
-    @api.model
-    def default_get(self, fields_list):
-        res = super().default_get(fields_list)
-        if self.env.context.get('is_pack'):
-            # You can create a dummy pack product or open a wizard
-            pack_product = self.env['pack.product'].search([], limit=1)
-            if pack_product:
-                res.update({
-                    'name': pack_product.name,
-                    # Optional: set a flag or custom field like is_pack=True
-                })
-        return res
-
 
 class SaleOrder(models.Model):
     """
