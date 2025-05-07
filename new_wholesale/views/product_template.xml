@@ -1,0 +1,25 @@
+<odoo>
+
+    <record id="view_pack_product_product_form" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="is_pack"/>
+                <!-- <field name="pack_description" readonly="1" attrs="{'invisible': [('is_pack', '=', False)]}"/> -->
+            </xpath>
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page string="Pack Components" attrs="{'invisible': [('is_pack', '=', False)]}">
+                    <field name="pack_component_ids" >
+                        <tree editable="bottom">
+                            <field name="component_id"/>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

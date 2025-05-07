@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'NewWholesale',
+    'description': """
+        This module about Wholesale add field to product.
+    """,
+    'sequence': 1,
+    'version': '1.0',
+    'category': 'Productivity',
+    'depends': ['sale'],
+    'data': [
+        # 'security/hospital_security.xml',
+        'security/ir.model.access.csv',
+        'views/product_template.xml',
+        'views/sale_type_view.xml',
+        'views/sale_type_wizard_view.xml',
+        'views/sale_order_line.xml'
+
+    ],
+    'demo': [],
+    'qweb': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}
